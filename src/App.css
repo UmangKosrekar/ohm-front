@@ -1,38 +1,295 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+:root {
+  --black: #000;
+  --white: #ffffff;
+  --placeHolder: #999;
+  --font: Open Sans;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background-color: var(--black);
+  font-family: var(--font);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.add-page {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+}
+.form-cell {
+  display: flex;
+}
+.form-btn-container {
+  display: flex;
+  justify-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.group {
+  position: relative;
+  margin: 2rem 4rem;
+}
+input {
+  font-size: 14px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 300px;
+  border: none;
+  border-bottom: 1px solid #757575;
+  background-color: var(--black);
+  color: var(--white);
+}
+input:focus {
+  outline: none;
 }
 
-@keyframes App-logo-spin {
+label {
+  color: var(--placeHolder);
+  font-size: 12px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+input:focus ~ label,
+input:valid ~ label {
+  top: -20px;
+  font-size: 12px;
+  color: var(--white);
+}
+
+.bar {
+  position: relative;
+  display: block;
+  width: 300px;
+}
+.bar:before,
+.bar:after {
+  content: "";
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: var(--white);
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.bar:before {
+  left: 50%;
+}
+.bar:after {
+  right: 50%;
+}
+
+input:focus ~ .bar:before,
+input:focus ~ .bar:after {
+  width: 55%;
+}
+
+.highlight {
+  position: absolute;
+  height: 60%;
+  width: 100px;
+  top: 25%;
+  left: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+input:focus ~ .highlight {
+  -webkit-animation: inputHighlighter 0.3s ease;
+  -moz-animation: inputHighlighter 0.3s ease;
+  animation: inputHighlighter 0.3s ease;
+}
+
+@-webkit-keyframes inputHighlighter {
   from {
-    transform: rotate(0deg);
+    background: var(--white);
   }
   to {
-    transform: rotate(360deg);
+    width: 0;
+    background: transparent;
   }
+}
+@-moz-keyframes inputHighlighter {
+  from {
+    background: var(--white);
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+@keyframes inputHighlighter {
+  from {
+    background: var(--white);
+  }
+  to {
+    width: 0;
+    background: transparent;
+  }
+}
+
+/* buttons-------------------------------------------------------- */
+
+.addBtn {
+  background-color: transparent;
+  font-family: inherit;
+  display: inline-block;
+  width: 8em;
+  height: 2.6em;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--white);
+  transition: color 0.5s;
+  font-size: 17px;
+  border-radius: 6px;
+  color: var(--white);
+}
+
+.addBtn:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  background: var(--white);
+  height: 150px;
+  width: 200px;
+  border-radius: 50%;
+  color: var(--black);
+}
+
+.addBtn:hover {
+  color: var(--black);
+}
+
+.addBtn:before {
+  top: 100%;
+  left: 100%;
+  transition: all 0.7s;
+}
+
+.addBtn:hover:before {
+  top: -30px;
+  left: -30px;
+}
+
+.addBtn:active:before {
+  background: #3a0ca3;
+  transition: background 0s;
+}
+/* nav-bar------------------------------------------------------------- */
+.nav-bar {
+  position: absolute;
+  z-index: 5;
+  height: 100%;
+  padding-right: 2rem;
+  background-color: #fff;
+  color: #000;
+}
+.nav-bar li {
+  cursor: pointer;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  font-size: 1.2rem;
+}
+.nav-bar ul {
+  list-style-type: none;
+}
+.menuBtn-container {
+  display: inline-block;
+  cursor: pointer;
+  right: 100%;
+  left: auto;
+}
+
+.menuBtn-container .bar1,
+.bar2,
+.bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.menuBtn-change .bar1 {
+  transform: translate(0, 11px) rotate(-45deg);
+}
+
+.menuBtn-change .bar2 {
+  opacity: 0;
+}
+
+.menuBtn-change .bar3 {
+  transform: translate(0, -11px) rotate(45deg);
+}
+.title {
+  margin: 4rem 2rem;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.comment-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.red {
+  color: #b44444;
+}
+.green {
+  color: #5ab444;
+}
+.card {
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: #1b1b1b;
+  display: flex;
+  margin: 2rem 0rem;
+  width: 60%;
+  justify-content: space-between;
+  display: flex;
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+}
+.card:hover {
+  width: 65%;
+}
+.card-fields {
+  color: #a3a3a3;
+  font-size: 0.8rem;
+}
+.card-title {
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #cfcfcf;
+}
+.card-description {
+  font-size: 16px;
+  color: #666;
+}
+.flag-container {
+  display: flex;
+  margin-right: -0.75rem;
+}
+.flag-text {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-top: -0.4rem;
+  margin-right: 0.2rem;
+}
+.addBtn-container {
+  position: absolute;
+  top: 5%;
+  right: 2%;
 }
